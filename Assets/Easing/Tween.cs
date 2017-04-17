@@ -25,6 +25,7 @@ namespace SimpleEasing
 		public const Action doNothing = null;
 		public TweenType type = TweenType.f;
 		public TweenRepeat repeat = TweenRepeat.Once;
+		public Coroutine animationRoutine;
 
 		public enum TweenType
 		{
@@ -153,7 +154,23 @@ namespace SimpleEasing
 			this.type = TweenType.delay;
 		}
 		#endregion
-		
+
+		#region Animation
+		public void Play()
+		{
+			TweenManager.instance.PlayTween(this);
+		}
+		public void Stop()
+		{
+			if(animationRoutine != null)
+				TweenManager.instance.StopTween(animationRoutine);
+		}
+		public void Reset()
+		{
+			this.restTime = this.originalTime;
+		}
+		#endregion
+
 		#region Tween Value Setters
 		public Vector2 Vector2Value
 		{

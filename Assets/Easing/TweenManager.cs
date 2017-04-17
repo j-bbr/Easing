@@ -19,7 +19,9 @@ using System.Collections.Generic;
 		/// <param name="t">Tween.</param>
 		public Coroutine PlayTween(Tween t)
 		{
-			return StartCoroutine(Animate(t));
+			var routine = StartCoroutine(Animate(t));
+			t.animationRoutine = routine;
+			return routine;
 		}
 		/// <summary>
 		/// Chains the tweens for sequential execution
