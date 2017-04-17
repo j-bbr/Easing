@@ -4,3 +4,5 @@ Tween any float, vector2, vector3 or quaternion. Extension methods for often use
 ```cs
 easeTarget.ScaleTo(targetScale, animationLength, easingStyle);
 ```
+##Example
+An [Example](https://alchem.itch.io/unity-easing) where you can fiddle with some of the easing parameters
