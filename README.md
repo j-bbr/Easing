@@ -6,3 +6,6 @@ easeTarget.ScaleTo(targetScale, animationLength, easingStyle);
 ```
 ## Example
 An [Example](https://alchem.itch.io/unity-easing) where you can fiddle with some of the easing parameters
+
+## License
+Licensed under a MIT-License. The easing equations are under a BSD-License however.
