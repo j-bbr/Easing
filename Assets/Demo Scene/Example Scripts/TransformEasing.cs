@@ -1,16 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using SimpleEasing;
 
 public class TransformEasing : MonoBehaviour {
 	public Transform easeTarget;
+	//0 is position, 1 is scale, 2 is rotation
+	public int animatedProperty = 0;
+	public List<Toggle> propertyToggles = new List<Toggle>();
 	public float length;
 	public Vector3 target;
 	public EasingTypes easing;
 	//So that ther is only one tween active on the transform
 	private UniqueCoroutine uniqueAnimation = new UniqueCoroutine();
-	
+
+
+	void Start()
+	{
+		uniqueAnimation.ReplaceOrStartTween(
+			easeTarget.MoveTo(new Vector3(0, 7f, 0), new Vector3(0, 0.5f, 0), 1.5f, EasingTypes.BounceOut)
+		);
+	}
+
 	public void EaseScale()
 	{
 		//So that the tween won't be interfere with a previous tween
@@ -29,6 +41,26 @@ public class TransformEasing : MonoBehaviour {
 		uniqueAnimation.ReplaceOrStartTween(
 			easeTarget.RotateTo(target, length, easing)
 		);
+	}
+	public void SetAnimationProperty()
+	{
+		var chosenOption = propertyToggles.Find(x => x.isOn);
+		animatedProperty = chosenOption.transform.GetSiblingIndex();
+	}
+	public void Ease()
+	{
+		switch(animatedProperty)
+		{
+		case 0:
+			EasePosition();
+			break;
+		case 1:
+			EaseScale();
+			break;
+		case 2:
+			EaseRotation();
+			break;
+		}
 	}
 
 	public void SetLength(string time)
@@ -66,7 +98,5 @@ public class TransformEasing : MonoBehaviour {
 	public void SetEasing(int enumIndex)
 	{
 		easing = (EasingTypes)enumIndex;
-		print(enumIndex);
-		print(easing);
 	}
 }
